@@ -3,101 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Files</title>
+    <title>Directory Listing</title>
     <style>
         body {
             font-family: sans-serif;
             margin: 20px;
+            background-color: #f8f8f8;
+            color: #333;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+
+        h1 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
         }
-        .file-list {
+
+        ul {
             list-style: none;
             padding: 0;
         }
-        .file-list li {
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
+
+        li {
+            margin-bottom: 8px;
             padding: 10px;
+            background-color: #fff;
             border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+            border-left: 5px solid #3498db;
+            cursor: pointer;
+
         }
-        .file-list a {
-            text-decoration: none;
-            color: #007bff;
+        li:hover{
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
         }
-        .file-list a:hover {
-            text-decoration: underline;
+        li span {
+            display: block;
         }
-        .file-info {
-            font-size: smaller;
-            color: #777;
-            margin-top: 5px;
+
+
+        .directory {
+            border-left-color: #27ae60;
         }
+
+        .file {
+            border-left-color: #e74c3c;
+        }
+        .hidden {
+            display:none;
+        }
+         .loading-message {
+            text-align:center;
+             font-style:italic;
+            padding-top:20px;
+        }
+        .back-button {
+              background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+       .back-button:hover {
+             background-color: #2980b9;
+       }
+       .button-container {
+        margin-bottom: 10px;
+       }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Download Files</h1>
-        <p>Welcome to the download page. Please choose a file from the list below:</p>
-
-        
-        <ul class="file-list">
-            <li>
-                <a href="Ass 4/set a/prog1.c">Set A Prog1</a>
-            </li>
-            <li>
-                <a href="Ass 4/set a/prog2.c" >Set A Prog2</a>
-
-            </li>
-            <li>
-                <a href="Ass 4/set a/prog3.c" >Set A Prog3</a>
-
-            </li>
-            <li>
-                <a href="Ass 4/set a/prog4.c" >Set A Prog4</a>
-
-            </li>
-            <li>
-                <a href="Ass 4/set a/prog5.c" >Set A Prog5</a>
-
-            </li>
-            <li>
-                <a href="Ass 4/set a/prog6.c" >Set A Prog6</a>
-
-            </li>
-        </ul>
-        <ul class="file-list">
-            <li>
-                <a href="Ass 4/set b/prog1.c" >Set B Prog1</a>
-            </li>
-            <li>
-                <a href="Ass 4/set b/prog2.c" >Set B Prog2</a>
-
-            </li>
-            <li>
-                <a href="Ass 4/set b/prog3.c" >Set B Prog3</a>
-
-            </li>
-            <li>
-                <a href="Ass 4/set b/prog4.c" >Set B Prog4</a>
-
-            </li>
-        </ul>
-        <ul class="file-list">
-            <li>
-                <a href="Ass 4/set c/prog1.c" >Set C Prog1</a>
-            </li>
-            <li>
-                <a href="Ass 4/set c/prog2.c" >Set C Prog2</a>
-
-            </li>
-            <li>
-                <a href="Ass 4/set c/prog3.c" >Set C Prog3</a>
-
-            </li>
-        </ul>
+    <h1>Directory Listing</h1>
+    <div class="button-container">
+        <button id="back-button" class="back-button hidden">Back</button>
     </div>
+    <div id="loading" class="loading-message">Loading...</div>
+    <ul id="file-list">
+        <!-- Files and directories will be appended here by JavaScript -->
+    </ul>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+           const fileList = document.getElementById('file-list');
+           const loadingMessage = document.getElementById('loading');
+            const backButton = document.getElementById('back-button');
+           let currentPath = [];
+
+           async function fetchDirectoryData() {
+               try {
+                  const response = await fetch('files.json');
+                   if(!response.ok){
+                      loadingMessage.textContent = 'Failed to fetch content';
+                      return null
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error('Error fetching JSON:', error);
+                    loadingMessage.textContent = 'Failed to fetch content';
+                   return null
+               }
+           }
+           function renderDirectory(data, targetList){
+                targetList.innerHTML = '';
+                for(const entry of data){
+                  const listItem = document.createElement('li');
+                    const span = document.createElement('span');
+                    span.textContent = entry.name;
+                   listItem.appendChild(span);
+
+                    if(entry.type === 'directory'){
+                         listItem.classList.add('directory');
+                        listItem.addEventListener('click', () => {
+                                currentPath.push(entry.name);
+                                renderCurrentDirectory();
+                                });
+                    }
+                     else{
+                         listItem.classList.add('file');
+                    }
+                  targetList.appendChild(listItem);
+                }
+
+            loadingMessage.classList.add('hidden');
+            }
+
+            function findCurrentDirectoryData(path, rootData){
+
+                let currentData = rootData;
+                for(const dirName of path){
+                     const found = currentData.find(item => item.name === dirName && item.type === 'directory');
+                     if(found) {
+                       currentData = found.children;
+                     }
+                     else{
+                      return null;
+                    }
+                }
+                return currentData;
+
+            }
+             function renderCurrentDirectory() {
+                const fileData = JSON.parse(sessionStorage.getItem('fileData'));
+                 if (!fileData) {
+                    loadingMessage.textContent = "Data not found. Try to refresh the page.";
+                    return;
+                 }
+                 const currentDirData = findCurrentDirectoryData(currentPath, fileData)
+
+                if(currentDirData){
+                     backButton.classList.remove('hidden');
+                     renderDirectory(currentDirData, fileList)
+                 } else {
+                   loadingMessage.textContent = "Directory not found.";
+                 }
+
+
+              }
+
+            backButton.addEventListener('click', () => {
+               currentPath.pop();
+               if(currentPath.length === 0) {
+                  backButton.classList.add('hidden');
+               }
+                renderCurrentDirectory();
+             })
+
+            async function init() {
+                const fileData = await fetchDirectoryData();
+                 if(fileData){
+                     sessionStorage.setItem('fileData', JSON.stringify(fileData));
+                   renderDirectory(fileData, fileList);
+                 }
+
+             }
+            init();
+        });
+    </script>
 </body>
 </html>
