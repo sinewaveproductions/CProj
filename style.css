@@ -1,0 +1,119 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #34495e;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ecf0f1;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+li {
+    margin-bottom: 15px;
+    padding: 18px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 5px solid #3498db;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+li span {
+    display: block;
+    font-size: 1.1em;
+    flex-grow: 1;
+}
+
+
+.directory {
+    border-left-color: #2ecc71;
+}
+
+.file {
+    border-left-color: #e74c3c;
+}
+
+.hidden {
+    display: none;
+}
+
+.loading-message {
+    text-align: center;
+    font-style: italic;
+    padding: 20px;
+    color: #777;
+}
+
+.back-button {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.back-button::before {
+     content: '\2190';
+    margin-right: 8px;
+}
+.back-button:hover {
+    background-color: #2980b9;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.button-container {
+    margin-bottom: 10px;
+    text-align: left;
+}
+@media (max-width: 768px){
+    body {
+        padding: 10px;
+    }
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+     li {
+         padding: 15px;
+        font-size: 0.9em;
+        margin-bottom: 10px;
+     }
+    .back-button {
+      padding: 10px 15px;
+      font-size: 0.9em;
+    }
+}
