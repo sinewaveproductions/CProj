@@ -106,7 +106,7 @@
                    return null
                }
            }
-           function renderDirectory(data, targetList){
+           function renderDirectory(data, targetList, currentPath){
                 targetList.innerHTML = '';
                 for(const entry of data){
                   const listItem = document.createElement('li');
@@ -116,13 +116,24 @@
 
                     if(entry.type === 'directory'){
                          listItem.classList.add('directory');
-                        listItem.addEventListener('click', () => {
+                         listItem.addEventListener('click', () => {
                                 currentPath.push(entry.name);
                                 renderCurrentDirectory();
-                                });
+                         });
+
                     }
                      else{
                          listItem.classList.add('file');
+                         listItem.addEventListener('click', (event) => {
+                           event.stopPropagation();
+                            let fullPath = currentPath.join('/') + '/' + entry.name;
+                            if (currentPath.length === 0){
+                              fullPath = entry.name;
+                            }
+
+                            window.location.href = fullPath;
+
+                         });
                     }
                   targetList.appendChild(listItem);
                 }
@@ -155,7 +166,7 @@
 
                 if(currentDirData){
                      backButton.classList.remove('hidden');
-                     renderDirectory(currentDirData, fileList)
+                     renderDirectory(currentDirData, fileList, currentPath)
                  } else {
                    loadingMessage.textContent = "Directory not found.";
                  }
@@ -175,7 +186,7 @@
                 const fileData = await fetchDirectoryData();
                  if(fileData){
                      sessionStorage.setItem('fileData', JSON.stringify(fileData));
-                   renderDirectory(fileData, fileList);
+                   renderDirectory(fileData, fileList, currentPath);
                  }
 
              }

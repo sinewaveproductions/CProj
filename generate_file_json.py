@@ -7,6 +7,8 @@ def generate_directory_json(root_dir):
     def _scan(dir_path):
         entries = []
         for item in os.listdir(dir_path):
+            if item.startswith('.'): # Ignore dotfiles/dot folders
+                continue
             item_path = os.path.join(dir_path, item)
             if os.path.isdir(item_path):
                 entries.append({
