@@ -8,6 +8,8 @@ on:
 jobs:
   generate_json:
     runs-on: ubuntu-latest
+    permissions: # Add permissions here
+      contents: write  # This gives the action permission to modify content (necessary for pushing)
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
