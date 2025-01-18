@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mouseover Background Change</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        #myElement {
+            width: 100px;
+            height: 50px;
+            background-color: lightblue;
+            border-radius: 1rem;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="myElement">Hover Over Me</div>
+
+    <script>
+        const element = document.getElementById("myElement");
+        element.addEventListener("mouseover", function () {
+            element.style.backgroundColor = "yellow";
+        });
+        element.addEventListener("mouseout", function () {
+            element.style.backgroundColor = "lightblue";
+        });
+    </script>
+
+</body>
+
+</html>

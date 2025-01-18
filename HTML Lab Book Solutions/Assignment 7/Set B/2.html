@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mouse Events</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        #myDiv {
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
+            padding: 20px;
+            border: 1px solid black;
+        }
+
+        .output-box {
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="myDiv">Move your mouse over me!</div>
+
+    <div class="output-box" id="mousemoveOutput">Mousemove:</div>
+    <div class="output-box" id="mouseenterOutput">Mouseenter still to detect.</div>
+    <div class="output-box" id="mouseoverOutput">Mouseover still to detect.</div>
+
+    <script>
+        const div = document.getElementById("myDiv");
+        const mousemoveOutput = document.getElementById("mousemoveOutput");
+        const mouseenterOutput = document.getElementById("mouseenterOutput");
+        const mouseoverOutput = document.getElementById("mouseoverOutput");
+
+        div.addEventListener("mousemove", function (event) {
+            mousemoveOutput.textContent = "Mousemove: X=" + event.clientX + ", Y=" + event.clientY;
+        });
+
+        div.addEventListener("mouseenter", function () {
+            mouseenterOutput.textContent = "Mouseenter";
+        });
+
+        div.addEventListener("mouseover", function () {
+            mouseoverOutput.textContent = "Mouseover";
+        });
+    </script>
+
+</body>
+
+</html>

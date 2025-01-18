@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Double Click Detection</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        #myElement {
+            width: 100px;
+            height: 50px;
+            border-radius: 1rem;
+            background-color: lightblue;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="myElement">Double Click Me</div>
+
+    <script>
+        const element = document.getElementById("myElement");
+        let clickCount = 0;
+        element.addEventListener("mousedown", function (event) {
+            clickCount++;
+            setTimeout(() => {
+                if (clickCount === 2) {
+                    alert("Double click detected!");
+                    clickCount = 0;
+                } else if (clickCount > 2) {
+                    clickCount = 0;
+                }
+            }, 300);
+        });
+    </script>
+
+</body>
+
+</html>
