@@ -1,6 +1,6 @@
 [
     {
-        "name": "Lab Book Solutions",
+        "name": "C Programming Lab Book Solutions",
         "type": "directory",
         "children": [
             {
@@ -291,6 +291,94 @@
                             },
                             {
                                 "name": "1.c",
+                                "type": "file"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "HTML Lab Book Solutions",
+        "type": "directory",
+        "children": [
+            {
+                "name": "Assignment 6",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": "Set B",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "2.html",
+                                "type": "file"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Set C",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "2.html",
+                                "type": "file"
+                            },
+                            {
+                                "name": "1.html",
+                                "type": "file"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Assignment 7",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": "Set B",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "2.html",
+                                "type": "file"
+                            },
+                            {
+                                "name": "1.html",
+                                "type": "file"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Set A",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "2.html",
+                                "type": "file"
+                            },
+                            {
+                                "name": "3.html",
+                                "type": "file"
+                            },
+                            {
+                                "name": "1.html",
+                                "type": "file"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Set C",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "2.html",
+                                "type": "file"
+                            },
+                            {
+                                "name": "1.html",
                                 "type": "file"
                             }
                         ]
