@@ -2,12 +2,10 @@ import os
 import json
 
 def generate_directory_json(root_dir):
-    """Generates a JSON representation of a directory structure."""
-
     def _scan(dir_path):
         entries = []
         for item in os.listdir(dir_path):
-            if item.startswith('.'): # Ignore dotfiles/dot folders
+            if item.startswith('.') or item in ['files.json', 'generate_file_json.py', 'index.html', 'style.css']:
                 continue
             item_path = os.path.join(dir_path, item)
             if os.path.isdir(item_path):
@@ -26,7 +24,7 @@ def generate_directory_json(root_dir):
 
 
 if __name__ == "__main__":
-    repo_root = "."  # Change this if your starting point is somewhere else. like 'labbook'
+    repo_root = "."
     file_data = generate_directory_json(repo_root)
     with open("files.json", "w") as f:
         json.dump(file_data, f, indent=4)
