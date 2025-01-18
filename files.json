@@ -1,20 +1,30 @@
 [
     {
-        "name": "generate_file_json.py",
-        "type": "file"
-    },
-    {
-        "name": "index.html",
-        "type": "file"
-    },
-    {
-        "name": "labbook",
+        "name": "Lab Book Solutions",
         "type": "directory",
         "children": [
             {
                 "name": "Assignment 7",
                 "type": "directory",
                 "children": [
+                    {
+                        "name": "Set B",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "3.c",
+                                "type": "file"
+                            },
+                            {
+                                "name": "2.c",
+                                "type": "file"
+                            },
+                            {
+                                "name": "1.c",
+                                "type": "file"
+                            }
+                        ]
+                    },
                     {
                         "name": "Set A",
                         "type": "directory",
@@ -25,6 +35,32 @@
                             },
                             {
                                 "name": "6.c",
+                                "type": "file"
+                            },
+                            {
+                                "name": "3.c",
+                                "type": "file"
+                            },
+                            {
+                                "name": "2.c",
+                                "type": "file"
+                            },
+                            {
+                                "name": "1.c",
+                                "type": "file"
+                            },
+                            {
+                                "name": "4.c",
+                                "type": "file"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Set C",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "5.c",
                                 "type": "file"
                             },
                             {
@@ -262,9 +298,5 @@
                 ]
             }
         ]
-    },
-    {
-        "name": "style.css",
-        "type": "file"
     }
 ]
