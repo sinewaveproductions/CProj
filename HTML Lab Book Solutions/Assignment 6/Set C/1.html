@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Array Operations</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        #container {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select,
+        button {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <h2>Array Operations</h2>
+        <label for="arrayInput">Enter array elements (comma-separated):</label>
+        <input type="text" id="arrayInput"><br>
+
+        <button onclick="processArray()">Process Array</button><br>
+
+        <label for="operation">Select operation:</label>
+        <select id="operation">
+            <option value="display">Display array</option>
+            <option value="sort">Sort array</option>
+            <option value="reverse">Reverse array</option>
+            <option value="search">Search element</option>
+        </select><br>
+
+        <div id="output"></div>
+    </div>
+
+
+    <script>
+        function processArray() {
+            let arrStr = document.getElementById("arrayInput").value;
+            let arr = arrStr.split(",").map(Number);
+            let operation = document.getElementById("operation").value;
+            let output = document.getElementById("output");
+            output.innerHTML = "";
+
+            switch (operation) {
+                case "display":
+                    output.innerHTML = "Array: " + arr;
+                    break;
+                case "sort":
+                    arr.sort((a, b) => a - b);
+                    output.innerHTML = "Sorted array: " + arr;
+                    break;
+                case "reverse":
+                    arr.reverse();
+                    output.innerHTML = "Reversed array: " + arr;
+                    break;
+                case "search":
+                    let searchElement = prompt("Enter element to search:");
+                    let index = arr.indexOf(parseInt(searchElement));
+                    if (index > -1) {
+                        output.innerHTML = "Element found at index: " + index;
+                    } else {
+                        output.innerHTML = "Element not found";
+                    }
+                    break;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

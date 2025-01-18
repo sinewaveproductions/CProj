@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Toggle Switch</title>
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .switch:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .switch.on {
+            background-color: #2196F3;
+        }
+
+        .switch.on:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="switch" onclick="toggleSwitch()" id="myToggle"></div>
+
+    <script>
+        let isOn = false;
+        function toggleSwitch() {
+            let switchElement = document.getElementById("myToggle");
+            isOn = !isOn;
+            switchElement.classList.toggle("on");
+        }
+    </script>
+
+</body>
+
+</html>
